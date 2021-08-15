@@ -1,0 +1,14 @@
+.content {
+  input {
+    width: 100%;
+    border-radius: .5rem;
+    padding: 2rem;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 20px var(--gray-3);
+    text-transform: capitalize;
+    border: none;
+    &::placeholder {
+      color: var(--gray-3);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10rem;
+  .header {
+    min-width: 98rem;
+  }
+  .section {
+    width: 100%;
+    margin-top: 5rem;
+  }
+}

@@ -1,0 +1,9 @@
+.content {
+  min-width: 20rem;
+  height: 30rem;
+  margin-right: 1rem;
+  background-color: var(--primary);
+  &:last-child {
+    margin-right: 0;
+  }
+}
