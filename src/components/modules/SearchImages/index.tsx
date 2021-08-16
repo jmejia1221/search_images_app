@@ -29,9 +29,12 @@ const SearchImages: FC = () => {
 
     const getPhotosHandler = async () => {
         try {
-            const data: any = await getPhotos.get('')
+            const data: any = await getPhotos.get('', {
+                params: {
+                    per_page: 20
+                }
+            })
             setShowCarousel(true);
-            console.log(data);
             const images: object[] = data.data.map((image: any) => {
                 return {
                     id: image.id,
@@ -50,7 +53,8 @@ const SearchImages: FC = () => {
         try {
             const data: any = await searchPhotos.get('', {
                 params: {
-                    query: searchValue
+                    query: searchValue,
+                    per_page: 20
                 }
             });
             setShowCarousel(true);

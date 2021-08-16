@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 
 // Components > UI
 import Thumbnail from "./Thumbnail";
@@ -24,9 +24,9 @@ const Carousel: FC<CarouselProps> = ({ images }) => {
         src_small: ''
     });
     const [showModal, setShowModal] = useState<boolean>(false);
+    const contentElement = useRef(null);
 
     const openModalHandler = (image: any): void => {
-        console.log(image)
         setShowModal(true);
         setExpandImage(image);
     }
@@ -35,30 +35,61 @@ const Carousel: FC<CarouselProps> = ({ images }) => {
         setShowModal(false);
     }
 
+    const carouselHandler = (
+        direction: string,
+        speed: number,
+        distance: number,
+        step: number): void => {
+        let element = contentElement.current;
+        let scrollAmount: number = 0;
+        let slideTimer = setInterval(function(){
+            if (direction === 'left'){
+                // @ts-ignore
+                element.scrollLeft -= step;
+            } else {
+                // @ts-ignore
+                element.scrollLeft += step;
+            }
+            scrollAmount += step;
+            if(scrollAmount >= distance){
+                window.clearInterval(slideTimer);
+            }
+        }, speed);
+    }
+
     return (
-        <div className={styles.content}>
-            { images.map( (img: any) => {
-                return (
-                    <Thumbnail
-                        modalHandler={openModalHandler}
-                        image={img}
-                        key={img.id} />
+        <>
+            <div ref={contentElement} className={styles.content}>
+                { images.map( (img: any) => {
+                    return (
+                        <Thumbnail
+                            modalHandler={openModalHandler}
+                            image={img}
+                            key={img.id} />
+                    )}
                 )}
-            )}
-            <Modal
-                closeModal={closeModalHandler}
-                isShowModal={showModal}>
-                <figure className={styles.expandedImage}>
-                    <img
-                        alt={expandImage.alt}
-                        className={styles.modalImage}
-                        src={expandImage?.src_regular} />
-                    <figcaption>
-                        {expandImage.alt || 'No caption'}
-                    </figcaption>
-                </figure>
-            </Modal>
-        </div>
+                <Modal
+                    closeModal={closeModalHandler}
+                    isShowModal={showModal}>
+                    <figure className={styles.expandedImage}>
+                        <img
+                            alt={expandImage.alt}
+                            className={styles.modalImage}
+                            src={expandImage?.src_regular} />
+                        <figcaption>
+                            {expandImage.alt || 'No caption'}
+                        </figcaption>
+                    </figure>
+                </Modal>
+            </div>
+            <div style={{
+                width: '100%',
+                display: "block"
+            }}>
+                <button onClick={() => carouselHandler('left', 25, 220, 10)}>left</button>
+                <button onClick={() => carouselHandler('right', 25, 220, 10)}>right</button>
+            </div>
+        </>
     );
 };
 
