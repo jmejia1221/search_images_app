@@ -9,6 +9,8 @@
   --gray-3: #C8CAD1;
   --gray-4: #A0A4AE;
   --gray-5: #828795;
-}
 
-$my_variable: #444;
+  // Alpha colors
+  --alpha-white: rgba(255, 255, 255, .9);
+  --alpha-black: rgba(26, 21, 39, .9);
+}

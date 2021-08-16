@@ -7,15 +7,17 @@ import Thumbnail from "./Thumbnail";
 import styles from './Carousel.module.scss';
 
 interface CarouselProps {
-    images: string[];
+    images: object[];
 }
 
 const Carousel: FC<CarouselProps> = ({ images }) => {
     return (
         <div className={styles.content}>
-            { images.map( t => {
+            { images.map( (img: any) => {
                 return (
-                    <Thumbnail key={t} />
+                    <Thumbnail
+                        image={img}
+                        key={img.id} />
                 )}
             )}
         </div>

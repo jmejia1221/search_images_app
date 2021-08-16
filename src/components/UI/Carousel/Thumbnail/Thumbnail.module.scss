@@ -3,7 +3,15 @@
   height: 30rem;
   margin-right: 1rem;
   background-color: var(--primary);
+  display: flex;
+  overflow: hidden;
+  border-radius: 5rem;
   &:last-child {
     margin-right: 0;
+  }
+  .image {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
   }
 }
