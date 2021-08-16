@@ -1,0 +1,53 @@
+.container {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display: none;
+  z-index: 1;
+  .content {
+    width: 80%;
+    height: 80%;
+    background-color: var(--gray-1);
+    max-height: 100%;
+    position: relative;
+    z-index: 9;
+    left: 10%;
+    right: 10%;
+    top: 10%;
+    border-radius: 2rem;
+  }
+  &.show {
+    width: 100%;
+    opacity: 1;
+    animation: showModal;
+    animation-fill-mode: forwards;
+    animation-duration: .5s;
+    animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: block;
+  }
+  .closeButton {
+    font-size: 4.5rem;
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    left: 0;
+    right: 0;
+    justify-content: flex-end;
+    background: var(--text-color-seconday);
+    top: 0;
+    padding: 1rem 3rem;
+  }
+}
+
+@keyframes showModal {
+  from {
+    opacity: 1;
+    visibility: hidden;
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

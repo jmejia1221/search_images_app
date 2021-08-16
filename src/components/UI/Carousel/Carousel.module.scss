@@ -4,6 +4,23 @@
   padding: 0 2rem;
   overflow: hidden;
   overflow-x: auto;
+  .modalImage {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+  }
+  .expandedImage {
+    width: 100%;
+    height: 100%;
+    figcaption {
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      text-align: center;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+  }
 }
 ::-webkit-scrollbar {
   width: 0;

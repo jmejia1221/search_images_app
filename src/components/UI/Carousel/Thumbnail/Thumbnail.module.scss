@@ -6,6 +6,27 @@
   display: flex;
   overflow: hidden;
   border-radius: 5rem;
+  cursor: pointer;
+  transition: all .5s;
+  .shadowImage {
+    display: none;
+    visibility: hidden;
+  }
+  &:hover {
+    transform: scale(.9);
+    > .shadowImage {
+      color: var(--gray-1);
+      display: block;
+      visibility: visible;
+      background-color: var(--alpha-black);
+      position: absolute;
+      inset: 0;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   &:last-child {
     margin-right: 0;
   }

@@ -5,6 +5,7 @@ import { getPhotos, searchPhotos } from '../../../services/unsplash-service';
 
 // components > UI
 import Input from "../../UI/Input";
+import Spinner from "../../UI/Spinner";
 import Carousel from "../../UI/Carousel";
 
 // hooks
@@ -12,7 +13,6 @@ import useDebounce from "../../../hooks/debounce";
 
 // CSS
 import styles from './Search.module.scss';
-import Spinner from "../../UI/Spinner";
 
 const SearchImages: FC = () => {
     const [data, setData] = useState<Array<object>>([]);
@@ -36,7 +36,6 @@ const SearchImages: FC = () => {
                 return {
                     id: image.id,
                     alt: image.alt_description,
-                    description: image.description,
                     src_regular: image.urls.regular,
                     src_small: image.urls.small
                 }
@@ -75,10 +74,10 @@ const SearchImages: FC = () => {
         setSearchValue(e.target.value)
     }
 
-    let carousel = <Spinner />
+    let carousel = <Spinner />;
 
     if (showCarousel) {
-        carousel = <Carousel images={data} />
+        carousel = <Carousel images={data} />;
     }
 
     return (
