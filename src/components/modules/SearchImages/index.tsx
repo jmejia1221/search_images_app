@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 
 // Services
-import { getPhotos, searchPhotos } from '../../../services/unsplash-service';
+import { api, API_DEFAULT_PARAMS } from '../../../services/unsplash-service';
 
 // components > UI
 import Input from "../../UI/Input";
@@ -33,9 +33,9 @@ const SearchImages: FC = () => {
 
     const getPhotosHandler = async () => {
         try {
-            const data: any = await getPhotos.get('', {
+            const data: any = await api.get('photos', {
                 params: {
-                    per_page: 20
+                    ...API_DEFAULT_PARAMS
                 }
             })
             setShowCarousel(true);
@@ -47,7 +47,7 @@ const SearchImages: FC = () => {
                     src_small: image.urls.small
                 }
             });
-            setData(images)
+            setData(images);
         } catch (err) {
             console.error(err);
         }
@@ -55,10 +55,10 @@ const SearchImages: FC = () => {
 
     const searchPhotosHandler = async () => {
         try {
-            const data: any = await searchPhotos.get('', {
+            const data: any = await api.get('search/photos', {
                 params: {
-                    query: searchValue,
-                    per_page: 20
+                    ...API_DEFAULT_PARAMS,
+                    query: searchValue
                 }
             });
             setShowCarousel(true);
@@ -71,7 +71,7 @@ const SearchImages: FC = () => {
                     src_small: image.urls.small
                 }
             });
-            setData(images)
+            setData(images);
         } catch (err) {
             console.error(err);
         }

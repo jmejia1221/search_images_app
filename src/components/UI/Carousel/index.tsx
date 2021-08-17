@@ -89,11 +89,11 @@ const Carousel: FC<CarouselProps> = ({ images }) => {
             <div className={styles.buttonActions}>
                 <div>
                     <Button onClick={
-                            () => carouselHandler('left', 25, 320, 10)
+                            () => carouselHandler('left', 25, 300, 10)
                         }
                         iconName={faLongArrowAltLeft} />
                     <Button onClick={
-                            () => carouselHandler('right', 25, 320, 10)
+                            () => carouselHandler('right', 25, 300, 10)
                         }
                         iconName={faLongArrowAltRight} />
                 </div>
