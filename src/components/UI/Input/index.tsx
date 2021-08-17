@@ -19,6 +19,7 @@ const Input: FC<InputProps> = (
     return (
         <span className={styles.content}>
             <input
+                value={value}
                 onChange={onChange}
                 placeholder={placeholder}
                 type={type}

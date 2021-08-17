@@ -1,11 +1,15 @@
 import React, {FC, useRef, useState} from 'react';
 
+// Libs
+import {faLongArrowAltLeft, faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
+
 // Components > UI
 import Thumbnail from "./Thumbnail";
 import Modal from "../Modal";
 
 // CSS
 import styles from './Carousel.module.scss';
+import Button from "../Button";
 
 interface CarouselProps {
     images: object[];
@@ -82,12 +86,17 @@ const Carousel: FC<CarouselProps> = ({ images }) => {
                     </figure>
                 </Modal>
             </div>
-            <div style={{
-                width: '100%',
-                display: "block"
-            }}>
-                <button onClick={() => carouselHandler('left', 25, 220, 10)}>left</button>
-                <button onClick={() => carouselHandler('right', 25, 220, 10)}>right</button>
+            <div className={styles.buttonActions}>
+                <div>
+                    <Button onClick={
+                            () => carouselHandler('left', 25, 320, 10)
+                        }
+                        iconName={faLongArrowAltLeft} />
+                    <Button onClick={
+                            () => carouselHandler('right', 25, 320, 10)
+                        }
+                        iconName={faLongArrowAltRight} />
+                </div>
             </div>
         </>
     );

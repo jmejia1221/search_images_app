@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
 
+// Libs
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+
 // CSS
 import styles from './Modal.module.scss';
 import classNames from "classnames";
@@ -18,7 +22,7 @@ const Modal: FC<ModalProps> = ({ isShowModal, closeModal, children }) => {
                 <span
                     onClick={closeModal}
                     className={styles.closeButton}>
-                    X
+                    <FontAwesomeIcon icon={faTimes} />
                 </span>
                 {children}
             </div>

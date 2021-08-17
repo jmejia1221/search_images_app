@@ -1,5 +1,9 @@
 import React, {FC, useEffect, useState} from "react";
 
+// Libs
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+
 // Services
 import { getPhotos, searchPhotos } from '../../../services/unsplash-service';
 
@@ -75,7 +79,11 @@ const SearchImages: FC = () => {
 
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
-        setSearchValue(e.target.value)
+        setSearchValue(e.target.value);
+    }
+
+    const cleanSearchInput = () => {
+        setSearchValue('');
     }
 
     let carousel = <Spinner />;
@@ -87,7 +95,13 @@ const SearchImages: FC = () => {
     return (
         <div className={styles.content}>
             <header className={styles.header}>
-                <Input onChange={inputHandler} type="text" />
+                <Input value={searchValue} onChange={inputHandler} type="text" />
+                {searchValue && (
+                    <div onClick={cleanSearchInput}
+                         className={styles.cleanButton}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </div>
+                )}
             </header>
             <section className={styles.section}>
                 {carousel}

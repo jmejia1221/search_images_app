@@ -15,7 +15,7 @@
     z-index: 9;
     left: 10%;
     right: 10%;
-    top: 10%;
+    top: 8%;
     border-radius: 2rem;
   }
   &.show {
@@ -28,16 +28,22 @@
     display: block;
   }
   .closeButton {
-    font-size: 4.5rem;
+    font-size: 4rem;
     position: absolute;
     cursor: pointer;
     display: flex;
-    left: 0;
-    right: 0;
-    justify-content: flex-end;
-    background: var(--text-color-seconday);
-    top: 0;
-    padding: 1rem 3rem;
+    right: 1rem;
+    top: 1rem;
+    justify-content: center;
+    background: var(--gray-1);
+    width: 6rem;
+    height: 6rem;
+    align-items: center;
+    border-radius: 50em;
+    transition: box-shadow .5s;
+    &:hover {
+      box-shadow: 0 8px 20px var(--gray-3)
+    }
   }
 }
 

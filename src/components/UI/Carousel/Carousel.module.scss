@@ -22,6 +22,17 @@
     }
   }
 }
+.buttonActions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  button {
+    &:first-child {
+      margin-right: 1rem;
+    }
+  }
+}
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
