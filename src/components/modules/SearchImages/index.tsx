@@ -27,28 +27,7 @@ const SearchImages: FC = () => {
 
     useEffect(() => {
         setShowCarousel(false);
-        if (!debouncedValue) {
-            const getPhotosHandler = async () => {
-                try {
-                    const data: any = await api.get('photos', {
-                        params: {
-                            ...API_DEFAULT_PARAMS
-                        }
-                    })
-                    setShowCarousel(true);
-                    const images: object[] = data.data.map((image: any) => {
-                        return {
-                            id: image.id,
-                            alt: image.alt_description,
-                            src_regular: image.urls.regular,
-                            src_small: image.urls.small
-                        }
-                    });
-                    setData(images);
-                } catch (err) {
-                    console.error(err);
-                }
-            }
+        if (!searchValue) {
             getPhotosHandler();
         }
         if (debouncedValue) {
@@ -79,8 +58,29 @@ const SearchImages: FC = () => {
         }
     }, [debouncedValue, searchValue])
 
+    const getPhotosHandler = async () => {
+        try {
+            const data: any = await api.get('photos', {
+                params: {
+                    ...API_DEFAULT_PARAMS
+                }
+            })
+            setShowCarousel(true);
+            const images: object[] = data.data.map((image: any) => {
+                return {
+                    id: image.id,
+                    alt: image.alt_description,
+                    src_regular: image.urls.regular,
+                    src_small: image.urls.small
+                }
+            });
+            setData(images);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
         setSearchValue(e.target.value);
     }
 
@@ -97,7 +97,7 @@ const SearchImages: FC = () => {
     return (
         <div className={styles.content}>
             <header className={styles.header}>
-                <Input value={searchValue} onChange={inputHandler} type="text" />
+                <Input value={searchValue} onChange={inputHandler} placeholder="Search an image" type="text" />
                 {searchValue && (
                     <div onClick={cleanSearchInput}
                          className={styles.cleanButton}>
