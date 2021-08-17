@@ -27,55 +27,57 @@ const SearchImages: FC = () => {
 
     useEffect(() => {
         setShowCarousel(false);
-        if (!debouncedValue) getPhotosHandler();
-        if (debouncedValue) searchPhotosHandler();
-    }, [debouncedValue])
-
-    const getPhotosHandler = async () => {
-        try {
-            const data: any = await api.get('photos', {
-                params: {
-                    ...API_DEFAULT_PARAMS
+        if (!debouncedValue) {
+            const getPhotosHandler = async () => {
+                try {
+                    const data: any = await api.get('photos', {
+                        params: {
+                            ...API_DEFAULT_PARAMS
+                        }
+                    })
+                    setShowCarousel(true);
+                    const images: object[] = data.data.map((image: any) => {
+                        return {
+                            id: image.id,
+                            alt: image.alt_description,
+                            src_regular: image.urls.regular,
+                            src_small: image.urls.small
+                        }
+                    });
+                    setData(images);
+                } catch (err) {
+                    console.error(err);
                 }
-            })
-            setShowCarousel(true);
-            const images: object[] = data.data.map((image: any) => {
-                return {
-                    id: image.id,
-                    alt: image.alt_description,
-                    src_regular: image.urls.regular,
-                    src_small: image.urls.small
-                }
-            });
-            setData(images);
-        } catch (err) {
-            console.error(err);
+            }
+            getPhotosHandler();
         }
-    }
-
-    const searchPhotosHandler = async () => {
-        try {
-            const data: any = await api.get('search/photos', {
-                params: {
-                    ...API_DEFAULT_PARAMS,
-                    query: searchValue
+        if (debouncedValue) {
+            const searchPhotosHandler = async () => {
+                try {
+                    const data: any = await api.get('search/photos', {
+                        params: {
+                            ...API_DEFAULT_PARAMS,
+                            query: searchValue
+                        }
+                    });
+                    setShowCarousel(true);
+                    const images: object[] = data.data.results.map((image: any) => {
+                        return {
+                            id: image.id,
+                            alt: image.alt_description,
+                            description: image.description,
+                            src_regular: image.urls.regular,
+                            src_small: image.urls.small
+                        }
+                    });
+                    setData(images);
+                } catch (err) {
+                    console.error(err);
                 }
-            });
-            setShowCarousel(true);
-            const images: object[] = data.data.results.map((image: any) => {
-                return {
-                    id: image.id,
-                    alt: image.alt_description,
-                    description: image.description,
-                    src_regular: image.urls.regular,
-                    src_small: image.urls.small
-                }
-            });
-            setData(images);
-        } catch (err) {
-            console.error(err);
+            }
+            searchPhotosHandler();
         }
-    }
+    }, [debouncedValue, searchValue])
 
     const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
