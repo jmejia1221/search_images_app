@@ -17,10 +17,12 @@ const Button: FC<ButtonProps> = ({
     iconName,
     onlyIcon = false,
     children,
-    onClick
+    onClick,
     }) => {
     return (
-        <button className={styles.content} onClick={onClick}>
+        <button
+            className={styles.content}
+            onClick={onClick}>
             { iconName ? (
                 <FontAwesomeIcon icon={iconName} />
             ) : null}

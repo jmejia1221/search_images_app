@@ -16,17 +16,21 @@ interface ModalProps {
 
 const Modal: FC<ModalProps> = ({ isShowModal, closeModal, children }) => {
     return (
-        <div className={classNames(styles.container, {[styles.show]: isShowModal})}>
-            <Backdrop show={true} />
-            <div className={styles.content}>
-                <span
-                    onClick={closeModal}
-                    className={styles.closeButton}>
-                    <FontAwesomeIcon icon={faTimes} />
-                </span>
-                {children}
-            </div>
-        </div>
+        <>
+            {isShowModal && (
+                <div className={classNames(styles.container, {[styles.show]: isShowModal})}>
+                    <Backdrop show={true} />
+                    <div className={styles.content}>
+                        <span
+                            onClick={closeModal}
+                            className={styles.closeButton}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </span>
+                        {children}
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 
